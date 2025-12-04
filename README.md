@@ -1,24 +1,20 @@
-# **ScaleCalc Pro**
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-**Precision tool for Architects and Designers**
-ScaleCalc Pro is a lightweight, intuitive calculator that helps you convert architectural scales and determine the exact scaling factor needed when resizing drawings, plans, or graphics.
+# Run and deploy your AI Studio app
 
----
+This contains everything you need to run your app locally.
 
-## **Features**
+View your app in AI Studio: https://ai.studio/apps/drive/1H121B6rPibs5VHjt1MZgjnLZ8bqn_boP
 
-### **1. Scale → Factor**
+## Run Locally
 
-Calculate the **multiplicative scale factor** required to convert from one drawing scale to another.
-Example: Convert **1:100 → 1:150**, or any custom scales.
+**Prerequisites:**  Node.js
 
-### **2. Scale + Factor → Scale**
 
-Find the **resulting drawing scale** when a known scale is multiplied by any factor.
-Example: Apply a scale factor of **0.5** to **1:100** and get **1:200**.
-
-### **3. Clean, Minimal Interface**
-
-Designed for architects, interior designers, engineers, and students who need instant scale conversions without clutter.
-
----
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

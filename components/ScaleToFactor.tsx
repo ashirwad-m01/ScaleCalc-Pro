@@ -19,7 +19,6 @@ export const ScaleToFactor: React.FC = () => {
     setResult(null);
 
     if (!startScale && !endScale) return;
-
     if (!startScale || !endScale) return;
 
     const s1 = parseFloat(startScale);
@@ -52,29 +51,29 @@ export const ScaleToFactor: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-2 text-center md:text-left">
-        <h2 className="text-2xl font-bold text-white">Calculate Scale Factor</h2>
-        <p className="text-slate-400 font-medium">
+    <div>
+      <div className="section-header">
+        <h2>Calculate Scale Factor</h2>
+        <p className="subtitle" style={{ margin: 0 }}>
           Determine the multiplicative factor between two scales.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center relative">
+      <div className="input-grid">
         {/* Input 1 */}
-        <div className="relative group">
-          <label htmlFor="startScaleA" className="block text-sm font-semibold text-slate-300 mb-2 ml-1">
+        <div className="input-group">
+          <label htmlFor="startScaleA">
             Starting Scale
           </label>
-          <div className="glass-input-container rounded-xl flex items-center overflow-hidden">
-            <div className="bg-white/5 border-r border-white/10 px-4 py-3.5">
-              <span className="text-indigo-400 font-bold text-lg">1:</span>
+          <div className="input-wrapper">
+            <div className="prefix-area">
+              <span className="prefix-text">1:</span>
             </div>
             <input
               type="number"
               name="startScaleA"
               id="startScaleA"
-              className="glass-input block w-full py-3.5 px-4 text-white placeholder:text-slate-600 text-lg font-medium"
+              className="input-field"
               placeholder="100"
               value={startScale}
               onChange={(e) => setStartScale(e.target.value)}
@@ -84,24 +83,24 @@ export const ScaleToFactor: React.FC = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex justify-center text-slate-600 pt-6">
-          <ArrowRight className="w-6 h-6" />
+        <div className="arrow-separator">
+          <ArrowRight size={24} />
         </div>
 
         {/* Input 2 */}
-        <div className="relative group">
-          <label htmlFor="endScaleA" className="block text-sm font-semibold text-slate-300 mb-2 ml-1">
+        <div className="input-group">
+          <label htmlFor="endScaleA">
             Target Scale
           </label>
-          <div className="glass-input-container rounded-xl flex items-center overflow-hidden">
-            <div className="bg-white/5 border-r border-white/10 px-4 py-3.5">
-              <span className="text-indigo-400 font-bold text-lg">1:</span>
+          <div className="input-wrapper">
+            <div className="prefix-area">
+              <span className="prefix-text">1:</span>
             </div>
             <input
               type="number"
               name="endScaleA"
               id="endScaleA"
-              className="glass-input block w-full py-3.5 px-4 text-white placeholder:text-slate-600 text-lg font-medium"
+              className="input-field"
               placeholder="150"
               value={endScale}
               onChange={(e) => setEndScale(e.target.value)}
@@ -113,53 +112,43 @@ export const ScaleToFactor: React.FC = () => {
       </div>
 
       {/* Results Section */}
-      <div className="mt-8">
+      <div className="results-area">
         {error && (
-          <div className="rounded-xl bg-red-900/20 p-4 border border-red-500/20 flex items-center gap-3">
-            <AlertCircle className="h-6 w-6 text-red-400" aria-hidden="true" />
-            <div className="text-sm text-red-200 font-medium">{error}</div>
+          <div className="error-box">
+            <AlertCircle size={24} color="#f87171" />
+            <div>{error}</div>
           </div>
         )}
 
         {!error && result && (
-          <div className="relative group">
-            <div className="relative bg-white/5 rounded-2xl p-6 border border-white/10 flex flex-col items-center justify-center text-center">
-              
-              <div className="flex items-center gap-2 text-indigo-300 font-bold mb-2 uppercase tracking-wider text-xs bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">
-                <Sparkles className="w-3 h-3" />
-                <span>Calculated Factor</span>
-              </div>
-              
-              <div className="my-4 flex items-center justify-center">
-                 <div className="text-5xl sm:text-6xl font-black text-white tracking-tight">
-                  {result}
-                </div>
-              </div>
-
-              <div className="flex gap-2 mt-2 w-full justify-center">
-                 <button
-                  onClick={handleCopy}
-                  className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-200 border
-                    ${copied 
-                      ? 'bg-emerald-500/20 border-emerald-500/30 text-emerald-300' 
-                      : 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/20'
-                    }`}
-                >
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  {copied ? 'Copied' : 'Copy Result'}
-                </button>
-              </div>
-
-              <p className="mt-4 text-xs text-slate-400 font-medium">
-                Multiply your starting dimensions by this factor.
-              </p>
+          <div className="result-card">
+            
+            <div className="result-label indigo">
+              <Sparkles size={12} />
+              <span>Calculated Factor</span>
             </div>
+            
+            <div className="result-value">
+              {result}
+            </div>
+
+            <button
+              onClick={handleCopy}
+              className={`copy-btn ${copied ? 'copied' : 'default'}`}
+            >
+              {copied ? <Check size={16} /> : <Copy size={16} />}
+              {copied ? 'Copied' : 'Copy Result'}
+            </button>
+
+            <p className="result-helper">
+              Multiply your starting dimensions by this factor.
+            </p>
           </div>
         )}
 
         {!error && !result && (
-          <div className="rounded-2xl border border-dashed border-white/10 bg-white/5 p-8 text-center">
-            <p className="text-slate-500 font-medium">Enter both scale values to see the conversion factor.</p>
+          <div className="empty-state">
+            <p>Enter both scale values to see the conversion factor.</p>
           </div>
         )}
       </div>
